@@ -57,3 +57,5 @@
 			- Implemented few different strategies. Find them under Strategies/Shipping
 			- Exposed setter of IShippingStrategy from Order
 			- Set value from Program
+
+	- Whenever we can inject interface to allow change of behavior we are leveraging strategy pattern
