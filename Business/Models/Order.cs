@@ -21,7 +21,7 @@ namespace Strategy_Pattern_First_Look.Business.Models
         public ShippingDetails ShippingDetails { get; set; }
 
         /// <summary>
-        /// Expose Sales Tax strategy interface
+        /// Expose Sales Tax strategy interface that will be used by the caller to set either of the sales tax strategies
         /// </summary>
         public ISalesTaxStrategy SalesTaxStrategy { get; set; }
 
@@ -32,7 +32,8 @@ namespace Strategy_Pattern_First_Look.Business.Models
                 return 0m;
             }
 
-            // Pass order details
+            // Simply invoking the method.
+            // This will be set dynamically to call either SwedenStrategy or USStrategy
             return SalesTaxStrategy.GetTaxFor(this);
         }
     }
