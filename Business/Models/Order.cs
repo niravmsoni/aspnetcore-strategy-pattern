@@ -25,16 +25,17 @@ namespace Strategy_Pattern_First_Look.Business.Models
         /// </summary>
         public ISalesTaxStrategy SalesTaxStrategy { get; set; }
 
-        public decimal GetTax()
+        public decimal GetTax(ISalesTaxStrategy salesTaxStrategy = default)
         {
-            if (SalesTaxStrategy == null)
+            var strategy = salesTaxStrategy ?? SalesTaxStrategy;
+            if (strategy == null)
             {
                 return 0m;
             }
 
             // Simply invoking the method.
             // This will be set dynamically to call either SwedenStrategy or USStrategy
-            return SalesTaxStrategy.GetTaxFor(this);
+            return strategy.GetTaxFor(this);
         }
     }
 

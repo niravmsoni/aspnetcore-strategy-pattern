@@ -22,3 +22,8 @@
 			- Write better tests
 			- Cleaner code that follows SRP
 			- Refer this commit - https://github.com/niravmsoni/aspnetcore-strategy-pattern/commit/7b22a5e41b3ea08476d0b70fad0c46cc41eed4ac
+
+		- Alternative implementation achieve strategy
+			- Instead of setting value for ISalesTaxStrategy in Order, we could pass ISalesStrategy as a parameter to GetTax method
+			- Whenever a method takes an interface to allow outcome of computation, we are leveraging strategy pattern
+			- Refer commit - 
