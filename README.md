@@ -50,3 +50,10 @@
 			- Add implementation in all strategies
 			- Expose IInvoiceStrategy as a property to Order class
 			- Set strategy from Program
+
+	- Another example of strategy
+		- Requirement - Support different shipping providers
+			- Created new IShippingStrategy interface
+			- Implemented few different strategies. Find them under Strategies/Shipping
+			- Exposed setter of IShippingStrategy from Order
+			- Set value from Program

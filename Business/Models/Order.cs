@@ -1,5 +1,6 @@
 ﻿using Strategy_Pattern_First_Look.Business.Strategies.Invoice;
 using Strategy_Pattern_First_Look.Business.Strategies.SalesTax;
+using Strategy_Pattern_First_Look.Business.Strategies.Shipping;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -27,7 +28,15 @@ namespace Strategy_Pattern_First_Look.Business.Models
         /// </summary>
         public ISalesTaxStrategy SalesTaxStrategy { get; set; }
 
+        /// <summary>
+        /// Expose InvoiceStrategy for caller to set
+        /// </summary>
         public IInvoiceStrategy InvoiceStrategy { get; set; }
+
+        /// <summary>
+        /// Expose IShippingStrategy for caller to set
+        /// </summary>
+        public IShippingStrategy ShippingStrategy { get; set; }
 
         public decimal GetTax(ISalesTaxStrategy salesTaxStrategy = default)
         {
@@ -48,6 +57,8 @@ namespace Strategy_Pattern_First_Look.Business.Models
                AmountDue > 0 &&
                ShippingStatus == ShippingStatus.WaitingForPayment)
             {
+                //Invoking implementation of whatever InvoiceStrategy was setup
+                //EmailInvoiceStrategy, FileInvoiceStrategy, PrintOnDemandInvoiceStrategy
                 InvoiceStrategy.Generate(this);
 
                 ShippingStatus = ShippingStatus.ReadyForShippment;
@@ -56,6 +67,10 @@ namespace Strategy_Pattern_First_Look.Business.Models
             {
                 throw new Exception("Unable to finalize order");
             }
+
+            //Invoking implementation of whatever IShippingStrategy from below options was setup
+            //(DhlShippingStrategy,FedexShippingStrategy,SwedishPostalServiceShippingStrategy,UnitedStatesPostalServiceShippingStrategy,UpsShippingStrategy)
+            ShippingStrategy.Ship(this);
         }
     }
 
