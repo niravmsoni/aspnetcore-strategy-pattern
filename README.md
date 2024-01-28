@@ -18,4 +18,5 @@
 
 		- Later, introduced detailed tax calculation for Sweden based on item (Food, Literature, HW etc.)
 		- We had to only modify SwedenSalesTaxStrategy and the change was easy.
-			- We were sure we are not impacting any other country (Single responsibility)
+			- We were sure the change we are doing only impacts Sweden and not any other country
+			- Refer this commit - https://github.com/niravmsoni/aspnetcore-strategy-pattern/commit/7b22a5e41b3ea08476d0b70fad0c46cc41eed4ac
