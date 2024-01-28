@@ -15,3 +15,7 @@
 			USASalesTaxStrategy
 		- From order class, exposed a setter for the ISalesTaxStrategy interface
 		- From Program, when we create Order, introduced an If..else statement and set SwedenSalesTaxStrategy or USASalesTaxStrategy based on whatever user selected in the destination
+
+		- Later, introduced detailed tax calculation for Sweden based on item (Food, Literature, HW etc.)
+		- We had to only modify SwedenSalesTaxStrategy and the change was easy.
+			- We were sure we are not impacting any other country (Single responsibility)
