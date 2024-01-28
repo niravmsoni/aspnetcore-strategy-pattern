@@ -1,4 +1,5 @@
 ﻿using Strategy_Pattern_First_Look.Business.Models;
+using Strategy_Pattern_First_Look.Business.Strategies.Invoice;
 using Strategy_Pattern_First_Look.Business.Strategies.SalesTax;
 using System;
 
@@ -38,6 +39,11 @@ namespace Strategy_Pattern_First_Look
 
             //Approach#2 - Pass strategy directly to method that takes in ISalesTaxStrategy
             Console.WriteLine(order.GetTax(new SwedenSalesTaxStrategy()));
+
+            order.SelectedPayments.Add(new Payment { PaymentProvider = PaymentProvider.Invoice });
+
+            order.InvoiceStrategy = new FileInvoiceStrategy();
+            order.FinalizeOrder();
         }
     }
 }

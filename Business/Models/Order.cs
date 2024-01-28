@@ -1,4 +1,6 @@
-﻿using Strategy_Pattern_First_Look.Business.Strategies.SalesTax;
+﻿using Strategy_Pattern_First_Look.Business.Strategies.Invoice;
+using Strategy_Pattern_First_Look.Business.Strategies.SalesTax;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 
@@ -25,6 +27,8 @@ namespace Strategy_Pattern_First_Look.Business.Models
         /// </summary>
         public ISalesTaxStrategy SalesTaxStrategy { get; set; }
 
+        public IInvoiceStrategy InvoiceStrategy { get; set; }
+
         public decimal GetTax(ISalesTaxStrategy salesTaxStrategy = default)
         {
             var strategy = salesTaxStrategy ?? SalesTaxStrategy;
@@ -36,6 +40,22 @@ namespace Strategy_Pattern_First_Look.Business.Models
             // Simply invoking the method.
             // This will be set dynamically to call either SwedenStrategy or USStrategy
             return strategy.GetTaxFor(this);
+        }
+
+        public void FinalizeOrder()
+        {
+            if (SelectedPayments.Any(x => x.PaymentProvider == PaymentProvider.Invoice) &&
+               AmountDue > 0 &&
+               ShippingStatus == ShippingStatus.WaitingForPayment)
+            {
+                InvoiceStrategy.Generate(this);
+
+                ShippingStatus = ShippingStatus.ReadyForShippment;
+            }
+            else if (AmountDue > 0)
+            {
+                throw new Exception("Unable to finalize order");
+            }
         }
     }
 

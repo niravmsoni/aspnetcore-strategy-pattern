@@ -6,4 +6,8 @@
     <RootNamespace>Strategy_Pattern_First_Look</RootNamespace>
   </PropertyGroup>
 
+  <ItemGroup>
+    <PackageReference Include="Newtonsoft.Json" Version="13.0.3" />
+  </ItemGroup>
+
 </Project>
